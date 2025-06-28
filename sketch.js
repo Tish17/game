@@ -24,6 +24,7 @@ function preload() {
 
 function setup() {
   createCanvas(600, 500);
+  textSize(32);
   waveform = song.getPeaks(peakNumber);
 }
 
@@ -40,6 +41,7 @@ function draw() {
     vertex(pt.x, pt.y);
   }
   endShape();
+  drawHealth();
   let circleXY = drawBall();
   let squareXY = drawObstacle();
   let collision = hasCollision(circleXY.x, circleXY.y, squareXY.x, squareXY.y);
@@ -137,4 +139,10 @@ function hasCollision(circleX, circleY, squareX, squareY) {
     return false;
   }
   return true;
+}
+
+function drawHealth() {
+  fill("white");
+  noStroke();
+  text(health, width / 2, height / 8);
 }
