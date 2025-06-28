@@ -22,7 +22,6 @@ function preload() {
 function setup() {
   createCanvas(600, 500);
   waveform = song.getPeaks(peakNumber);
-  
 }
 
 function draw() {
