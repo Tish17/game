@@ -14,6 +14,9 @@ let obstacleVelocity = 5;
 let ballRadius = 25;
 let obstacleSide = 20;
 let obstacleDiagonal;
+let health = 10;
+let collisionInProcess = false;
+let circleColor = "white";
 
 function preload() {
   song = loadSound('sound.mp3');
@@ -37,8 +40,18 @@ function draw() {
     vertex(pt.x, pt.y);
   }
   endShape();
-  drawBall();
-  drawObstacle();
+  let circleXY = drawBall();
+  let squareXY = drawObstacle();
+  let collision = hasCollision(circleXY.x, circleXY.y, squareXY.x, squareXY.y);
+  if (!collisionInProcess && collision) {
+    health--;
+    collisionInProcess = true;
+    circleColor = "red";
+    console.log(health);
+  } else if (collisionInProcess && !collision) {
+    collisionInProcess = false;
+    circleColor = "white";
+  }
   step += velocity;
 }
 
@@ -93,11 +106,14 @@ function addPoints() {
 }
 
 function drawBall() {
-  fill("white");
-  let x0 = map(2, 1, limit - 2, 0, width);
-  let y0 = height / 2 - lerpPeak(step + 2) * height / 2;
+  fill(circleColor);
+  noStroke();
+  let x = map(2, 1, limit - 2, 0, width);
+  let y = height / 2 - lerpPeak(step + 2) * height / 2;
   jump();
-  circle(x0, y0 + jumpOffset, ballRadius);
+  y += jumpOffset;
+  circle(x, y, ballRadius);
+  return {x, y};
 }
 
 function drawObstacle() {
@@ -107,6 +123,18 @@ function drawObstacle() {
   fill("red");
   noStroke();
   let pt = points[points.length - obstacleStep - 1];
-  square(pt.x - obstacleSide / 2, pt.y - obstacleSide / 2, obstacleSide);
+  let x = pt.x - obstacleSide / 2;
+  let y = pt.y - obstacleSide / 2;
+  square(x, y, obstacleSide);
   obstacleStep += obstacleVelocity;
+  return {x, y};
+}
+
+function hasCollision(circleX, circleY, squareX, squareY) {
+  let dx = abs(circleX - squareX) + obstacleSide;
+  let dy = abs(circleY - squareY) + obstacleSide;
+  if (dx > ballRadius + obstacleSide / 2 || dy > ballRadius + obstacleSide / 2) {
+    return false;
+  }
+  return true;
 }
