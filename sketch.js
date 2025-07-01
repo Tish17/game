@@ -32,6 +32,10 @@ function draw() {
   background("black");
   stroke("white");
   noFill();
+  if (!song.isPlaying()) {
+    drawTapToPlay();
+    return;
+  }
   if (step >= peakNumber) {
     step = 0;
   }
@@ -145,4 +149,10 @@ function drawHealth() {
   fill("white");
   noStroke();
   text(health, width / 2, height / 8);
+}
+
+function drawTapToPlay() {
+  fill("white");
+  noStroke();
+  text("Tap to play", width / 3, height / 2);
 }
