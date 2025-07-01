@@ -3,20 +3,17 @@ let waveform = [];
 let step = 0;
 let limit = 10;
 let peakNumber = 1000;
-let jumpOffset = 0;
-let jumpVelocity = 0;
-let gravity = 0.8;
-let isJumping = false;
 let velocity = 0.06;
 let points;
 let obstacleStep = 0;
 let obstacleVelocity = 5;
-let ballRadius = 25;
 let obstacleSide = 20;
 let obstacleDiagonal;
 let health = 10;
 let collisionInProcess = false;
-let circleColor = "white";
+let ballColor = "white";
+let ball;
+let ballRadius = 25;
 
 function preload() {
   song = loadSound('sound.mp3');
@@ -26,6 +23,7 @@ function setup() {
   createCanvas(600, 500);
   textSize(32);
   waveform = song.getPeaks(peakNumber);
+  ball = new Ball();
 }
 
 function draw() {
@@ -46,46 +44,26 @@ function draw() {
   }
   endShape();
   drawHealth();
-  let circleXY = drawBall();
+  let circleXY = ball.draw(ballColor, lerpPeak(step + 2));
   let squareXY = drawObstacle();
   let collision = hasCollision(circleXY.x, circleXY.y, squareXY.x, squareXY.y);
   if (!collisionInProcess && collision) {
     health--;
     collisionInProcess = true;
-    circleColor = "red";
-    console.log(health);
+    ballColor = "red";
   } else if (collisionInProcess && !collision) {
     collisionInProcess = false;
-    circleColor = "white";
+    ballColor = "white";
   }
   step += velocity;
-}
-
-function lerpPeak(index) {
-  let i = floor(index);
-  let frac = index - i;
-  let a = waveform[i] || 0;
-  let b = waveform[i + 1] || 0;
-  return a + (b - a) * frac;
 }
 
 function mousePressed() {
   if (!song.isPlaying()) {
     song.play();
   }
-  if (!isJumping) {
-    jumpVelocity = -12;
-    isJumping = true;
-  }
-}
-
-function jump() {
-  jumpVelocity += gravity;
-  jumpOffset += jumpVelocity;
-  if (jumpOffset > 0) {
-    jumpOffset = 0;
-    jumpVelocity = 0;
-    isJumping = false;
+  if (!ball.isJumping()) {
+    ball.updateJumping();
   }
 }
 
@@ -111,15 +89,12 @@ function addPoints() {
   }
 }
 
-function drawBall() {
-  fill(circleColor);
-  noStroke();
-  let x = map(2, 1, limit - 2, 0, width);
-  let y = height / 2 - lerpPeak(step + 2) * height / 2;
-  jump();
-  y += jumpOffset;
-  circle(x, y, ballRadius);
-  return {x, y};
+function lerpPeak(index) {
+  let i = floor(index);
+  let frac = index - i;
+  let a = waveform[i] || 0;
+  let b = waveform[i + 1] || 0;
+  return a + (b - a) * frac;
 }
 
 function drawObstacle() {
