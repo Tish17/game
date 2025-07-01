@@ -5,15 +5,8 @@ let limit = 10;
 let peakNumber = 1000;
 let velocity = 0.06;
 let points;
-let obstacleStep = 0;
-let obstacleVelocity = 5;
-let obstacleSide = 20;
-let obstacleDiagonal;
-let health = 10;
-let collisionInProcess = false;
-let ballColor = "white";
 let ball;
-let ballRadius = 25;
+let obstacle;
 
 function preload() {
   song = loadSound('sound.mp3');
@@ -24,6 +17,7 @@ function setup() {
   textSize(32);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
+  obstacle = new Entity(0, 20, "red", ball.getRadius(), 5, false);
 }
 
 function draw() {
@@ -44,16 +38,16 @@ function draw() {
   }
   endShape();
   drawHealth();
-  let circleXY = ball.draw(ballColor, lerpPeak(step + 2));
-  let squareXY = drawObstacle();
-  let collision = hasCollision(circleXY.x, circleXY.y, squareXY.x, squareXY.y);
-  if (!collisionInProcess && collision) {
-    health--;
-    collisionInProcess = true;
-    ballColor = "red";
-  } else if (collisionInProcess && !collision) {
-    collisionInProcess = false;
-    ballColor = "white";
+  ball.draw(lerpPeak(step + 2));
+  obstacle.draw(points);
+  let collision = obstacle.hasCollision(ball.getPoint().x, ball.getPoint().y);
+  if (!obstacle.isCollisionInProcess() && collision) {
+    ball.setHealth(ball.getHealth() - 1);
+    ball.setColor("red");
+    obstacle.setCollisionInProcess(true);
+  } else if (obstacle.isCollisionInProcess() && !collision) {
+    ball.setColor("white");
+    obstacle.setCollisionInProcess(false);
   }
   step += velocity;
 }
@@ -97,33 +91,10 @@ function lerpPeak(index) {
   return a + (b - a) * frac;
 }
 
-function drawObstacle() {
-  if (obstacleStep > points.length - 1) {
-    obstacleStep = 0;
-  }
-  fill("red");
-  noStroke();
-  let pt = points[points.length - obstacleStep - 1];
-  let x = pt.x - obstacleSide / 2;
-  let y = pt.y - obstacleSide / 2;
-  square(x, y, obstacleSide);
-  obstacleStep += obstacleVelocity;
-  return {x, y};
-}
-
-function hasCollision(circleX, circleY, squareX, squareY) {
-  let dx = abs(circleX - squareX) + obstacleSide;
-  let dy = abs(circleY - squareY) + obstacleSide;
-  if (dx > ballRadius + obstacleSide / 2 || dy > ballRadius + obstacleSide / 2) {
-    return false;
-  }
-  return true;
-}
-
 function drawHealth() {
   fill("white");
   noStroke();
-  text(health, width / 2, height / 8);
+  text(ball.getHealth(), width / 2, height / 8);
 }
 
 function drawTapToPlay() {

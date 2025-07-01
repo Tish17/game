@@ -1,42 +1,62 @@
-let offset = 0;
-let jumpVelocity = 0;
-let gravity = 0.8;
-let jumping = false;
-
-const radius = 25;
-
 class Ball {
   constructor() {
-    
+    this.offset = 0;
+    this.velocity = 0;
+    this.gravity = 0.8;
+    this.jumping = false;
+    this.radius = 25;
+    this.color = "white";
+    this.health = 10;
+    this.x = 0;
+    this.y = 0;
   }
   
-  draw(color, stepY) {
-    fill(color);
+  draw(stepY) {
+    fill(this.color);
     noStroke();
-    let x = map(2, 1, limit - 2, 0, width);
-    let y = height / 2 * (1 - stepY);
+    this.x = map(2, 1, limit - 2, 0, width);
+    this.y = height / 2 * (1 - stepY);
     this.jump();
-    y += offset;
-    circle(x, y, radius);
-    return {x, y};
+    this.y += this.offset;
+    circle(this.x, this.y, this.radius);
   }
   
   jump() {
-    jumpVelocity += gravity;
-    offset += jumpVelocity;
-    if (offset > 0) {
-      offset = 0;
-      jumpVelocity = 0;
-      jumping = false;
+    this.velocity += this.gravity;
+    this.offset += this.velocity;
+    if (this.offset > 0) {
+      this.offset = 0;
+      this.velocity = 0;
+      this.jumping = false;
     }
   }
   
   isJumping() {
-    return jumping;
+    return this.jumping;
   }
   
   updateJumping() {
-    jumpVelocity = -12;
-    jumping = true;
+    this.velocity = -12;
+    this.jumping = true;
+  }
+  
+  getRadius() {
+    return this.radius;
+  }
+  
+  getPoint() {
+    return {x: this.x, y: this.y};
+  }
+  
+  setCollor(color) {
+    this.color = color;
+  }
+  
+  getHealth() {
+    return this.health;
+  }
+  
+  setHealth(health) {
+    this.health = health;
   }
 }
