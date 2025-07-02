@@ -48,7 +48,7 @@ class Ball {
     return {x: this.x, y: this.y};
   }
   
-  setCollor(color) {
+  setColor(color) {
     this.color = color;
   }
   

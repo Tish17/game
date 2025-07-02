@@ -14,7 +14,7 @@ class Entity {
     if (this.entityStep > points.length - 1) {
       this.entityStep = 0;
     }
-    fill(color);
+    fill(this.color);
     noStroke();
     let pt = points[points.length - this.entityStep - 1];
     this.x = pt.x - this.size / 2;
@@ -33,10 +33,10 @@ class Entity {
   }
   
   isCollisionInProcess() {
-    return collisionInProcess;
+    return this.collisionInProcess;
   }
   
-  setCollosionInProcess(collisionInProcess) {
+  setCollisionInProcess(collisionInProcess) {
     this.collisionInProcess = collisionInProcess;
   }
 }
