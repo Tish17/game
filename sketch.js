@@ -9,7 +9,7 @@ let ball;
 let obstacle;
 
 function preload() {
-  song = loadSound('sound.mp3');
+  song = loadSound('sound2.mp3');
 }
 
 function setup() {
