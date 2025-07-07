@@ -55,7 +55,7 @@ function draw() {
 }
 
 function drawEntity() {
-  let entityCount = obstacle.getCount() + boost.getCount() + 1;
+  let entityCount = obstacle.getCount() + boost.getCount() + health.getCount() + 1;
   if (entityCount % 2 !== 0 && entityCount % 3 === 0) {
     boost.draw(points);
     return boost;
