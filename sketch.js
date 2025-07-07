@@ -25,7 +25,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(windowWidth, windowHeight);
   bgLayer = createGraphics(width, height);
   bgLayer.image(bgImage, 0, 0, width, height);
   textSize(32);
