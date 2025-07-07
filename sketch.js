@@ -1,4 +1,6 @@
 let song;
+let bgImage;
+let bgLayer;
 let waveform = [];
 let step = 0;
 let limit = 10;
@@ -19,10 +21,13 @@ const Types = Object.freeze({
 
 function preload() {
   song = loadSound('sound2.mp3');
+  bgImage = loadImage('space.jpg');
 }
 
 function setup() {
-  createCanvas(600, 500);
+  createCanvas(800, 600);
+  bgLayer = createGraphics(width, height);
+  bgLayer.image(bgImage, 0, 0, width, height);
   textSize(32);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
@@ -33,7 +38,7 @@ function setup() {
 }
 
 function draw() {
-  background("black");
+  image(bgLayer, 0, 0);
   if (!song.isPlaying()) {
     drawTapToPlay();
     return;
