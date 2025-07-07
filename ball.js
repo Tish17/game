@@ -18,11 +18,9 @@ class Ball {
     this.y = height / 2 * (1 - stepY);
     this.jump();
     this.y += this.offset;
-    for (let r = 40; r >= this.radius; r -= 2) {
-      fill(red(this.color), green(this.color), blue(this.color), 30);
-      circle(this.x, this.y, r);
-    }
     fill(this.color);
+    ctx.shadowBlur = 40;
+    ctx.shadowColor = this.color;
     circle(this.x, this.y, this.radius);
   }
   

@@ -9,6 +9,7 @@ let ball;
 let obstacle;
 let boost;
 let health;
+let ctx;
 
 const Types = Object.freeze({
   OBSTACLE: 'OBSTACLE',
@@ -28,6 +29,7 @@ function setup() {
   obstacle = new Entity(0, 20, "red", ball.getRadius(), 5, false, Types.OBSTACLE);
   boost = new Entity(0, 20, "blue", ball.getRadius(), 5, false, Types.BOOST);
   health = new Entity(0, 20, "green", ball.getRadius(), 5, false, Types.HEALTH);
+  ctx = drawingContext;
 }
 
 function draw() {
