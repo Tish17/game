@@ -24,7 +24,7 @@ class Entity {
     let pt = points[points.length - this.entityStep - 1];
     this.x = pt.x - this.size / 2;
     this.y = pt.y - this.size / 2;
-    square(this.x, this.y, this.size);
+    rect(this.x, this.y, this.size, this.size, 3);
     this.entityStep += this.velocity;
   }
   
