@@ -43,31 +43,34 @@ function draw() {
   endShape();
   drawHealth();
   ball.draw(lerpPeak(step + 2));
-  drawEntities();
-  checkCollision();
+  let entity = drawEntity();
+  checkCollision(entity);
   step += velocity;
 }
 
-function drawEntities() {
+function drawEntity() {
   let entityCount = obstacle.getCount() + boost.getCount() + 1;
   if (entityCount % 2 !== 0 && entityCount % 3 === 0) {
     boost.draw(points);
+    return boost;
   } else if (entityCount % 2 === 0 && entityCount % 3 === 0) {
     health.draw(points);
+    return health;
   } else {
     obstacle.draw(points);
+    return obstacle;
   }
 }
 
-function checkCollision() {
-  let collision = obstacle.hasCollision(ball.getPoint().x, ball.getPoint().y);
-  if (!obstacle.isCollisionInProcess() && collision) {
+function checkCollision(entity) {
+  let collision = entity.hasCollision(ball.getPoint().x, ball.getPoint().y);
+  if (!entity.isCollisionInProcess() && collision) {
     ball.setHealth(ball.getHealth() - 1);
-    ball.setColor("red");
-    obstacle.setCollisionInProcess(true);
-  } else if (obstacle.isCollisionInProcess() && !collision) {
+    ball.setColor(entity.getColor());
+    entity.setCollisionInProcess(true);
+  } else if (entity.isCollisionInProcess() && !collision) {
     ball.setColor("white");
-    obstacle.setCollisionInProcess(false);
+    entity.setCollisionInProcess(false);
   }
 }
 

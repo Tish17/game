@@ -45,4 +45,8 @@ class Entity {
   getCount() {
     return this.count;
   }
+
+  getColor() {
+    return this.color;
+  }
 }
