@@ -13,12 +13,16 @@ class Ball {
   }
   
   draw(stepY) {
-    fill(this.color);
     noStroke();
     this.x = map(2, 1, limit - 2, 0, width);
     this.y = height / 2 * (1 - stepY);
     this.jump();
     this.y += this.offset;
+    for (let r = 40; r >= this.radius; r -= 2) {
+      fill(red(this.color), green(this.color), blue(this.color), 30);
+      circle(this.x, this.y, r);
+    }
+    fill(this.color);
     circle(this.x, this.y, this.radius);
   }
   
