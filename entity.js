@@ -1,7 +1,7 @@
 class Entity {
-  constructor(step, size, color, radius, velocity, collisionInProcess, type) {
+  constructor(step, color, radius, velocity, collisionInProcess, type) {
     this.entityStep = step;
-    this.size = size;
+    this.size = height * 0.04;
     this.color = color;
     this.radius = radius;
     this.velocity = velocity;

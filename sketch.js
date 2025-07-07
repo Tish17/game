@@ -6,6 +6,7 @@ let step = 0;
 let limit = 10;
 let peakNumber = 1000;
 let velocity = 0.06;
+let jumpHeight = 15;
 let points;
 let ball;
 let obstacle;
@@ -31,9 +32,9 @@ function setup() {
   textSize(32);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
-  obstacle = new Entity(0, 20, color(255, 66, 66), ball.getRadius(), 5, false, Types.OBSTACLE);
-  boost = new Entity(0, 20, color(38, 49, 255), ball.getRadius(), 5, false, Types.BOOST);
-  health = new Entity(0, 20, color(0, 184, 43), ball.getRadius(), 5, false, Types.HEALTH);
+  obstacle = new Entity(0, color(255, 66, 66), ball.getRadius(), 5, false, Types.OBSTACLE);
+  boost = new Entity(0, color(38, 49, 255), ball.getRadius(), 5, false, Types.BOOST);
+  health = new Entity(0, color(0, 184, 43), ball.getRadius(), 5, false, Types.HEALTH);
   ctx = drawingContext;
 }
 
@@ -110,7 +111,7 @@ function addPoints() {
   let controlPoints = [];
   for (let i = 0; i < limit; i++) {
     let x = map(i, 1, limit - 2, 0, width);
-    let y = height / 2 - lerpPeak(step + i) * height / 2;
+    let y = height / 2 * (1 - lerpPeak(step + i));
     controlPoints.push({ x, y });
   }
   for (let i = 1; i < controlPoints.length - 2; i++) {

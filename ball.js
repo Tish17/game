@@ -4,7 +4,7 @@ class Ball {
     this.velocity = 0;
     this.gravity = 0.8;
     this.jumping = false;
-    this.radius = 25;
+    this.radius = height * 0.06;
     this.color = "white";
     this.health = 10;
     this.power = 10;
@@ -39,7 +39,7 @@ class Ball {
   }
   
   updateJumping() {
-    this.velocity = -12;
+    this.velocity = -jumpHeight;
     this.jumping = true;
   }
   
