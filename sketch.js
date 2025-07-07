@@ -7,6 +7,8 @@ let velocity = 0.06;
 let points;
 let ball;
 let obstacle;
+let boost;
+let health;
 
 function preload() {
   song = loadSound('sound2.mp3');
@@ -18,6 +20,8 @@ function setup() {
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
   obstacle = new Entity(0, 20, "red", ball.getRadius(), 5, false);
+  boost = new Entity(0, 20, "blue", ball.getRadius(), 5, false);
+  health = new Entity(0, 20, "green", ball.getRadius(), 5, false);
 }
 
 function draw() {
@@ -39,7 +43,23 @@ function draw() {
   endShape();
   drawHealth();
   ball.draw(lerpPeak(step + 2));
-  obstacle.draw(points);
+  drawEntities();
+  checkCollision();
+  step += velocity;
+}
+
+function drawEntities() {
+  let entityCount = obstacle.getCount() + boost.getCount() + 1;
+  if (entityCount % 2 !== 0 && entityCount % 3 === 0) {
+    boost.draw(points);
+  } else if (entityCount % 2 === 0 && entityCount % 3 === 0) {
+    health.draw(points);
+  } else {
+    obstacle.draw(points);
+  }
+}
+
+function checkCollision() {
   let collision = obstacle.hasCollision(ball.getPoint().x, ball.getPoint().y);
   if (!obstacle.isCollisionInProcess() && collision) {
     ball.setHealth(ball.getHealth() - 1);
@@ -49,7 +69,6 @@ function draw() {
     ball.setColor("white");
     obstacle.setCollisionInProcess(false);
   }
-  step += velocity;
 }
 
 function mousePressed() {

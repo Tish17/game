@@ -8,10 +8,12 @@ class Entity {
     this.collisionInProcess = collisionInProcess;
     this.x = 0;
     this.y = 0;
+    this.count = 0;
   }
   
   draw(points) {
     if (this.entityStep > points.length - 1) {
+      this.count++;
       this.entityStep = 0;
     }
     fill(this.color);
@@ -38,5 +40,9 @@ class Entity {
   
   setCollisionInProcess(collisionInProcess) {
     this.collisionInProcess = collisionInProcess;
+  }
+
+  getCount() {
+    return this.count;
   }
 }
