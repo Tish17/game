@@ -34,8 +34,6 @@ function setup() {
 
 function draw() {
   background("black");
-  stroke("white");
-  noFill();
   if (!song.isPlaying()) {
     drawTapToPlay();
     return;
@@ -44,6 +42,11 @@ function draw() {
     step = 0;
   }
   addPoints();
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = "violet";
+  stroke("violet");
+  strokeWeight(2);
+  noFill();
   beginShape();
   for (let pt of points) {
     vertex(pt.x, pt.y);
