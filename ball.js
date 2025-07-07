@@ -13,12 +13,12 @@ class Ball {
   }
   
   draw(stepY) {
-    noStroke();
     this.x = map(2, 1, limit - 2, 0, width);
     this.y = height / 2 * (1 - stepY);
     this.jump();
     this.y += this.offset;
     fill(this.color);
+    noStroke();
     ctx.shadowBlur = 40;
     ctx.shadowColor = this.color;
     circle(this.x, this.y, this.radius);

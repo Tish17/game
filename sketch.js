@@ -133,11 +133,13 @@ function lerpPeak(index) {
 function drawHealth() {
   fill("white");
   noStroke();
+  ctx.shadowBlur = 0;
   text(ball.getHealth(), width / 2, height / 8);
 }
 
 function drawTapToPlay() {
   fill("white");
   noStroke();
+  ctx.shadowBlur = 0;
   text("Tap to play", width / 3, height / 2);
 }
