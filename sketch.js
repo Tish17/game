@@ -29,7 +29,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   bgLayer = createGraphics(width, height);
   bgLayer.image(bgImage, 0, 0, width, height);
-  textSize(32);
+  textSize(50);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
   obstacle = new Entity(0, color(255, 66, 66), ball.getRadius(), 5, false, Types.OBSTACLE);
@@ -147,5 +147,5 @@ function drawTapToPlay() {
   fill("white");
   noStroke();
   ctx.shadowBlur = 0;
-  text("Tap to play", width / 3, height / 2);
+  text("Tap to play", width / 2.5, height / 2);
 }
