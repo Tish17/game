@@ -10,6 +10,12 @@ let obstacle;
 let boost;
 let health;
 
+const Types = Object.freeze({
+  OBSTACLE: 'OBSTACLE',
+  BOOST: 'BOOST',
+  HEALTH: 'HEALTH'
+});
+
 function preload() {
   song = loadSound('sound2.mp3');
 }
@@ -19,9 +25,9 @@ function setup() {
   textSize(32);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
-  obstacle = new Entity(0, 20, "red", ball.getRadius(), 5, false);
-  boost = new Entity(0, 20, "blue", ball.getRadius(), 5, false);
-  health = new Entity(0, 20, "green", ball.getRadius(), 5, false);
+  obstacle = new Entity(0, 20, "red", ball.getRadius(), 5, false, Types.OBSTACLE);
+  boost = new Entity(0, 20, "blue", ball.getRadius(), 5, false, Types.BOOST);
+  health = new Entity(0, 20, "green", ball.getRadius(), 5, false, Types.HEALTH);
 }
 
 function draw() {

@@ -1,5 +1,5 @@
 class Entity {
-  constructor(step, size, color, radius, velocity, collisionInProcess) {
+  constructor(step, size, color, radius, velocity, collisionInProcess, type) {
     this.entityStep = step;
     this.size = size;
     this.color = color;
@@ -9,6 +9,7 @@ class Entity {
     this.x = 0;
     this.y = 0;
     this.count = 0;
+    this.type = type;
   }
   
   draw(points) {
@@ -48,5 +49,9 @@ class Entity {
 
   getColor() {
     return this.color;
+  }
+
+  getType() {
+    return this.type;
   }
 }
