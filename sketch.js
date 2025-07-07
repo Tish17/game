@@ -20,7 +20,7 @@ const Types = Object.freeze({
 });
 
 function preload() {
-  song = loadSound('sound2.mp3');
+  song = loadSound('sound3.mp3');
   bgImage = loadImage('space.jpg');
 }
 
