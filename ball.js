@@ -7,6 +7,7 @@ class Ball {
     this.radius = 25;
     this.color = "white";
     this.health = 10;
+    this.power = 10;
     this.x = 0;
     this.y = 0;
   }
@@ -58,5 +59,13 @@ class Ball {
   
   setHealth(health) {
     this.health = health;
+  }
+
+  getPower() {
+    return this.power;
+  }
+
+  setPower(power) {
+    this.power = power;
   }
 }

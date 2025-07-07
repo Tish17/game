@@ -71,7 +71,13 @@ function drawEntity() {
 function checkCollision(entity) {
   let collision = entity.hasCollision(ball.getPoint().x, ball.getPoint().y);
   if (!entity.isCollisionInProcess() && collision) {
-    ball.setHealth(ball.getHealth() - 1);
+    if (entity.getType() === Types.OBSTACLE) {
+      ball.setHealth(ball.getHealth() - 1);
+    } else if (entity.getType() === Types.HEALTH) {
+      ball.setHealth(ball.getHealth() + 1);
+    } else if (entity.getType() === Types.BOOST) {
+      ball.setPower(ball.getPower() + 1);
+    }
     ball.setColor(entity.getColor());
     entity.setCollisionInProcess(true);
   } else if (entity.isCollisionInProcess() && !collision) {
