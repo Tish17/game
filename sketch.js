@@ -19,6 +19,7 @@ let ctx;
 let startSuperMode;
 let endSuperMode = 0;
 let superModeTimeout = 10;
+let superBorderSize = 5;
 
 const Types = Object.freeze({
   OBSTACLE: 'OBSTACLE',
@@ -58,18 +59,16 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
-  if (endSuperMode > 0 && startSuperMode > endSuperMode) {
-    ball.setPower(0);
-    ball.setColor("white");
-    endSuperMode = 0;
-  }
+  checkSuperMode();
   addPoints();
   drawLine();
   drawState(health, width * 0.9);
   drawState(boost, width * 0.1);
   ball.draw(lerpPeak(step + 2));
   let entity = drawEntity();
-  if (!ball.superMode()) {
+  if (ball.superMode()) {
+    drawSuperBorder();
+  } else {
     checkCollision(entity);
   }
   step += velocity;
@@ -99,6 +98,14 @@ function drawEntity() {
   } else {
     obstacle.draw(points);
     return obstacle;
+  }
+}
+
+function checkSuperMode() {
+  if (endSuperMode > 0 && startSuperMode > endSuperMode) {
+    ball.setPower(0);
+    ball.setColor("white");
+    endSuperMode = 0;
   }
 }
 
@@ -175,4 +182,16 @@ function drawTapToPlay() {
   noStroke();
   ctx.shadowBlur = 0;
   text("Tap to play", width / 2.5, height / 2);
+}
+
+function drawSuperBorder() {
+  let superColor = ball.getSuperColor();
+  noStroke();
+  fill(superColor);
+  ctx.shadowBlur = 100;
+  ctx.shadowColor = superColor;
+  rect(0, 0, width, superBorderSize);
+  rect(0, height - superBorderSize, width, superBorderSize);
+  rect(0, 0, superBorderSize, height);
+  rect(width - superBorderSize, 0, superBorderSize, height);
 }

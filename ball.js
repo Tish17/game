@@ -16,7 +16,7 @@ class Ball {
     this.y = height / 2 * (1 - stepY);
     this.jump();
     this.y += this.offset;
-    let superColor = this.superMode() ? "yellow" : this.color;
+    let superColor = this.superMode() ? this.getSuperColor() : this.color;
     fill(superColor);
     noStroke();
     ctx.shadowBlur = 100;
@@ -69,5 +69,9 @@ class Ball {
 
   superMode() {
     return this.power === 10;
+  }
+
+  getSuperColor() {
+    return color(Math.random() * 256, Math.random() * 256, Math.random() * 256);
   }
 }
