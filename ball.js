@@ -56,7 +56,9 @@ class Ball {
   }
   
   setHealth(health) {
-    this.health = health;
+    if (this.health < 10) {
+      this.health = health;
+    }
   }
 
   getPower() {
