@@ -9,6 +9,7 @@ let velocity = 0.06;
 let jumpHeight = 15;
 let points;
 let ball;
+let ballColor = "white";
 let ballRadius;
 let obstacle;
 let boost;
@@ -104,7 +105,7 @@ function drawEntity() {
 function checkSuperMode() {
   if (endSuperMode > 0 && startSuperMode > endSuperMode) {
     ball.setPower(0);
-    ball.setColor("white");
+    ball.setColor(ballColor);
     endSuperMode = 0;
   }
 }
@@ -125,7 +126,7 @@ function checkCollision(entity) {
     ball.setColor(entity.getColor());
     entity.setCollisionInProcess(true);
   } else if (entity.isCollisionInProcess() && !collision) {
-    ball.setColor("white");
+    ball.setColor(ballColor);
     entity.setCollisionInProcess(false);
   }
 }

@@ -4,7 +4,7 @@ class Ball {
     this.velocity = 0;
     this.gravity = 0.8;
     this.jumping = false;
-    this.color = "white";
+    this.color = ballColor;
     this.health = 10;
     this.power = 0;
     this.x = 0;
