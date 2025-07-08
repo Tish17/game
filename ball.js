@@ -6,7 +6,7 @@ class Ball {
     this.jumping = false;
     this.color = "white";
     this.health = 10;
-    this.power = 10;
+    this.power = 0;
     this.x = 0;
     this.y = 0;
   }
@@ -16,10 +16,11 @@ class Ball {
     this.y = height / 2 * (1 - stepY);
     this.jump();
     this.y += this.offset;
-    fill(this.color);
+    let superColor = this.superMode() ? "yellow" : this.color;
+    fill(superColor);
     noStroke();
     ctx.shadowBlur = 100;
-    ctx.shadowColor = this.color;
+    ctx.shadowColor = superColor;
     circle(this.x, this.y, ballRadius);
   }
   
@@ -64,5 +65,9 @@ class Ball {
 
   setPower(power) {
     this.power = power;
+  }
+
+  superMode() {
+    return this.power === 10;
   }
 }

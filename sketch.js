@@ -16,6 +16,9 @@ let health;
 let entitySize;
 let entityOffset;
 let ctx;
+let startSuperMode;
+let endSuperMode = 0;
+let superModeTimeout = 10;
 
 const Types = Object.freeze({
   OBSTACLE: 'OBSTACLE',
@@ -47,6 +50,7 @@ function setup() {
 
 function draw() {
   image(bgLayer, 0, 0);
+  startSuperMode = new Date().getTime();
   if (!song.isPlaying()) {
     drawTapToPlay();
     return;
@@ -54,13 +58,20 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
+  if (endSuperMode > 0 && startSuperMode > endSuperMode) {
+    ball.setPower(0);
+    ball.setColor("white");
+    endSuperMode = 0;
+  }
   addPoints();
   drawLine();
   drawState(health, width * 0.9);
   drawState(boost, width * 0.1);
   ball.draw(lerpPeak(step + 2));
   let entity = drawEntity();
-  checkCollision(entity);
+  if (!ball.superMode()) {
+    checkCollision(entity);
+  }
   step += velocity;
 }
 
@@ -100,6 +111,9 @@ function checkCollision(entity) {
       ball.setHealth(ball.getHealth() + 1);
     } else if (entity.getType() === Types.BOOST) {
       ball.setPower(ball.getPower() + 1);
+      if (ball.superMode()) {
+        endSuperMode = startSuperMode + superModeTimeout * 1000;
+      }
     }
     ball.setColor(entity.getColor());
     entity.setCollisionInProcess(true);
