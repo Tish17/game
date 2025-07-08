@@ -30,6 +30,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  document.body.style.overflow = 'hidden';
   bgLayer = createGraphics(width, height);
   bgLayer.image(bgImage, 0, 0, width, height);
   textSize(50);
