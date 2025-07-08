@@ -53,8 +53,12 @@ function setup() {
 function draw() {
   image(bgLayer, 0, 0);
   startSuperMode = new Date().getTime();
-  if (!song.isPlaying()) {
-    drawTapToPlay();
+  if (!song.isPlaying() && ball.getHealth() === 10) {
+    drawText("Tap to play");
+    return;
+  } else if (ball.getHealth() < 1) {
+    drawText("GAME OVER");
+    song.stop();
     return;
   }
   if (step >= peakNumber) {
@@ -178,11 +182,11 @@ function drawState(entity, x) {
   text(entity.getType() === 'HEALTH' ? ball.getHealth() : ball.getPower(), x, height / 8);
 }
 
-function drawTapToPlay() {
+function drawText(textToDraw) {
   fill("white");
   noStroke();
   ctx.shadowBlur = 0;
-  text("Tap to play", width / 2.5, height / 2);
+  text(textToDraw, width / 2.5, height / 2);
 }
 
 function drawSuperBorder() {

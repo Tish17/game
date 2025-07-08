@@ -56,7 +56,7 @@ class Ball {
   }
   
   setHealth(health) {
-    if (this.health < 10) {
+    if (health <= 10) {
       this.health = health;
     }
   }
