@@ -4,7 +4,6 @@ class Ball {
     this.velocity = 0;
     this.gravity = 0.8;
     this.jumping = false;
-    this.radius = height * 0.06;
     this.color = "white";
     this.health = 10;
     this.power = 10;
@@ -21,7 +20,7 @@ class Ball {
     noStroke();
     ctx.shadowBlur = 100;
     ctx.shadowColor = this.color;
-    circle(this.x, this.y, this.radius);
+    circle(this.x, this.y, ballRadius);
   }
   
   jump() {
@@ -41,10 +40,6 @@ class Ball {
   updateJumping() {
     this.velocity = -jumpHeight;
     this.jumping = true;
-  }
-  
-  getRadius() {
-    return this.radius;
   }
   
   getPoint() {

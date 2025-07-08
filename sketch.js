@@ -9,9 +9,11 @@ let velocity = 0.06;
 let jumpHeight = 15;
 let points;
 let ball;
+let ballRadius;
 let obstacle;
 let boost;
 let health;
+let entitySize;
 let ctx;
 
 const Types = Object.freeze({
@@ -32,9 +34,11 @@ function setup() {
   textSize(50);
   waveform = song.getPeaks(peakNumber);
   ball = new Ball();
-  obstacle = new Entity(0, color(255, 66, 66), ball.getRadius(), 5, false, Types.OBSTACLE);
-  boost = new Entity(0, color(38, 49, 255), ball.getRadius(), 5, false, Types.BOOST);
-  health = new Entity(0, color(0, 184, 43), ball.getRadius(), 5, false, Types.HEALTH);
+  ballRadius = height * 0.06;
+  obstacle = new Entity(color(255, 66, 66), Types.OBSTACLE);
+  boost = new Entity(color(38, 49, 255), Types.BOOST);
+  health = new Entity(color(0, 184, 43), Types.HEALTH);
+  entitySize = height * 0.04;
   ctx = drawingContext;
 }
 
