@@ -19,7 +19,7 @@ class Ball {
     this.y += this.offset;
     fill(this.color);
     noStroke();
-    ctx.shadowBlur = 40;
+    ctx.shadowBlur = 100;
     ctx.shadowColor = this.color;
     circle(this.x, this.y, this.radius);
   }
