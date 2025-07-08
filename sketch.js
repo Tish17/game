@@ -56,7 +56,7 @@ function draw() {
   addPoints();
   drawLine();
   drawState(health, width * 0.9);
-  drawState(boost, width * 0.01);
+  drawState(boost, width * 0.1);
   ball.draw(lerpPeak(step + 2));
   let entity = drawEntity();
   checkCollision(entity);
