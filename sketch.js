@@ -21,7 +21,7 @@ const Types = Object.freeze({
 });
 
 function preload() {
-  song = loadSound('sound3.mp3');
+  song = loadSound('sound.mp3');
   bgImage = loadImage('space.jpg');
 }
 
@@ -48,6 +48,15 @@ function draw() {
     step = 0;
   }
   addPoints();
+  drawLine();
+  drawHealth();
+  ball.draw(lerpPeak(step + 2));
+  let entity = drawEntity();
+  checkCollision(entity);
+  step += velocity;
+}
+
+function drawLine() {
   ctx.shadowBlur = 20;
   ctx.shadowColor = "violet";
   stroke("violet");
@@ -58,11 +67,6 @@ function draw() {
     vertex(pt.x, pt.y);
   }
   endShape();
-  drawHealth();
-  ball.draw(lerpPeak(step + 2));
-  let entity = drawEntity();
-  checkCollision(entity);
-  step += velocity;
 }
 
 function drawEntity() {
