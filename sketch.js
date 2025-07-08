@@ -55,7 +55,8 @@ function draw() {
   }
   addPoints();
   drawLine();
-  drawHealth();
+  drawState(health, width * 0.9);
+  drawState(boost, width * 0.01);
   ball.draw(lerpPeak(step + 2));
   let entity = drawEntity();
   checkCollision(entity);
@@ -146,11 +147,12 @@ function lerpPeak(index) {
   return a + (b - a) * frac;
 }
 
-function drawHealth() {
-  fill("white");
+function drawState(entity, x) {
+  ctx.shadowBlur = 40;
+  ctx.shadowColor = entity.getColor();
+  fill(entity.getColor());
   noStroke();
-  ctx.shadowBlur = 0;
-  text(ball.getHealth(), width / 2, height / 8);
+  text(entity.getType() === 'HEALTH' ? ball.getHealth() : ball.getPower(), x, height / 8);
 }
 
 function drawTapToPlay() {
