@@ -8,12 +8,14 @@ class Entity {
     this.y = 0;
     this.count = 0;
     this.type = type;
+    this.offset = Math.random() * entityOffset;
   }
   
   draw(points) {
     if (this.step > points.length - 1) {
       this.count++;
       this.step = 0;
+      this.offset = Math.random() * entityOffset;
     }
     fill(this.color);
     noStroke();
@@ -21,15 +23,17 @@ class Entity {
     ctx.shadowColor = this.color;
     let pt = points[points.length - this.step - 1];
     this.x = pt.x - entitySize / 2;
-    this.y = pt.y - entitySize / 2;
+    this.y = pt.y - entitySize / 2 - this.offset;
     rect(this.x, this.y, entitySize, entitySize, 3);
     this.step += this.velocity;
   }
   
   hasCollision(ballX, ballY) {
-    let dx = abs(ballX - this.x) + entitySize;
-    let dy = abs(ballY - this.y) + entitySize;
-    return !(dx > ballRadius + entitySize / 2 || dy > ballRadius + entitySize / 2);
+    let closestX = Math.max(this.x, Math.min(ballX, this.x + entitySize));
+    let closestY = Math.max(this.y, Math.min(ballY, this.y + entitySize));
+    let dx = ballX - closestX;
+    let dy = ballY - closestY;
+    return (dx * dx + dy * dy) < (ballRadius * ballRadius);
   }
   
   isCollisionInProcess() {

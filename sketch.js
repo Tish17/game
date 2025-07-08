@@ -14,6 +14,7 @@ let obstacle;
 let boost;
 let health;
 let entitySize;
+let entityOffset;
 let ctx;
 
 const Types = Object.freeze({
@@ -39,6 +40,7 @@ function setup() {
   boost = new Entity(color(38, 49, 255), Types.BOOST);
   health = new Entity(color(0, 184, 43), Types.HEALTH);
   entitySize = height * 0.04;
+  entityOffset = jumpHeight + ballRadius * 2;
   ctx = drawingContext;
 }
 
