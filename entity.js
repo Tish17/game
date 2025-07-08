@@ -16,16 +16,17 @@ class Entity {
       this.count++;
       this.step = 0;
       this.offset = Math.random() * entityOffset;
+    } else {
+      fill(this.color);
+      noStroke();
+      ctx.shadowBlur = 50;
+      ctx.shadowColor = this.color;
+      let pt = points[points.length - this.step - 1];
+      this.x = pt.x - entitySize / 2;
+      this.y = pt.y - entitySize / 2 - this.offset;
+      rect(this.x, this.y, entitySize, entitySize, 3);
+      this.step += this.velocity;
     }
-    fill(this.color);
-    noStroke();
-    ctx.shadowBlur = 50;
-    ctx.shadowColor = this.color;
-    let pt = points[points.length - this.step - 1];
-    this.x = pt.x - entitySize / 2;
-    this.y = pt.y - entitySize / 2 - this.offset;
-    rect(this.x, this.y, entitySize, entitySize, 3);
-    this.step += this.velocity;
   }
   
   hasCollision(ballX, ballY) {
