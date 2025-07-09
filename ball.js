@@ -13,7 +13,7 @@ class Ball {
   
   draw(stepY) {
     this.x = map(2, 1, limit - 2, 0, width);
-    this.y = height / 2 * (1 - stepY);
+    this.y = height / 2 * (1 - amplitude * stepY);
     this.jump();
     this.y += this.offset;
     let superColor = this.superMode() ? this.getSuperColor() : this.color;

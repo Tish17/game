@@ -22,6 +22,7 @@ let endSuperMode = 0;
 let superModeTimeout = 10;
 let superBorderSize = 5;
 const collisionMargin = 15;
+const amplitude = 0.5;
 
 const Types = Object.freeze({
   OBSTACLE: 'OBSTACLE',
@@ -155,7 +156,7 @@ function addPoints() {
   let controlPoints = [];
   for (let i = 0; i < limit; i++) {
     let x = map(i, 1, limit - 2, 0, width);
-    let y = height / 2 * (1 - lerpPeak(step + i));
+    let y = height / 2 * (1 - amplitude * lerpPeak(step + i));
     controlPoints.push({ x, y });
   }
   for (let i = 1; i < controlPoints.length - 2; i++) {
