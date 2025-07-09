@@ -21,6 +21,7 @@ let startSuperMode;
 let endSuperMode = 0;
 let superModeTimeout = 10;
 let superBorderSize = 5;
+const collisionMargin = 15;
 
 const Types = Object.freeze({
   OBSTACLE: 'OBSTACLE',

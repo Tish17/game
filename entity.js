@@ -35,7 +35,7 @@ class Entity {
     let closestY = Math.max(this.y, Math.min(ballY, this.y + entitySize));
     let dx = ballX - closestX;
     let dy = ballY - closestY;
-    return (dx * dx + dy * dy) < (ballRadius * ballRadius);
+    return (dx * dx + dy * dy) < Math.pow(ballRadius - collisionMargin, 2);
   }
   
   isCollisionInProcess() {
