@@ -31,7 +31,6 @@ const Types = Object.freeze({
 });
 
 function preload() {
-  song = loadSound('sound2.mp3');
   bgImage = loadImage('space.jpg');
 }
 
@@ -41,7 +40,6 @@ function setup() {
   bgLayer = createGraphics(width, height);
   bgLayer.image(bgImage, 0, 0, width, height);
   textSize(50);
-  waveform = song.getPeaks(peakNumber);
   ball = new Ball();
   ballRadius = height * 0.06;
   obstacle = new Entity(color(255, 66, 66), Types.OBSTACLE);
@@ -50,12 +48,17 @@ function setup() {
   entitySize = height * 0.04;
   entityOffset = jumpHeight + ballRadius * 2;
   ctx = drawingContext;
+  fileInput = createFileInput(handleFile);
+  fileInput.position(width / 2, height / 2);
 }
 
 function draw() {
   image(bgLayer, 0, 0);
+  if (waveform.length === 0) {
+    return;
+  }
   startSuperMode = new Date().getTime();
-  if (!song.isPlaying() && ball.getHealth() === 10) {
+  if (waveform.length > 0 && !song.isPlaying() && ball.getHealth() === 10) {
     drawText("Tap to play");
     return;
   } else if (ball.getHealth() < 1) {
@@ -143,7 +146,7 @@ function checkCollision(entity) {
 }
 
 function mousePressed() {
-  if (!song.isPlaying()) {
+  if (waveform.length > 0 && !song.isPlaying()) {
     song.play();
   }
   if (!ball.isJumping()) {
@@ -206,4 +209,15 @@ function drawSuperBorder() {
   rect(0, height - superBorderSize, width, superBorderSize);
   rect(0, 0, superBorderSize, height);
   rect(width - superBorderSize, 0, superBorderSize, height);
+}
+
+function handleFile(file) {
+  if (file.name.toLowerCase().endsWith('.mp3')) {
+    song = loadSound(file.data, () => {
+      waveform = song.getPeaks(peakNumber);
+      fileInput.remove();
+    });
+  } else {
+    alert('Only mp3 files are supported');
+  }
 }
