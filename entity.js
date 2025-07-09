@@ -8,14 +8,15 @@ class Entity {
     this.y = 0;
     this.count = 0;
     this.type = type;
-    this.offset = Math.random() * entityOffset;
+    this.offset = 0;
   }
   
   draw(points) {
     if (this.step > points.length - 1) {
       this.count++;
       this.step = 0;
-      this.offset = Math.random() * entityOffset;
+      let minOffset = Math.abs(Math.min(...points.map(pt => pt.y)) - entitySize / 2);
+      this.offset = Math.random() * Math.min(minOffset, entityOffset);
     } else {
       fill(this.color);
       noStroke();
