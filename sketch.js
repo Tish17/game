@@ -49,7 +49,15 @@ function setup() {
   entityOffset = jumpHeight + ballRadius * 2;
   ctx = drawingContext;
   fileInput = createFileInput(handleFile);
-  fileInput.position(width / 2, height / 2);
+  fileInput.position(width / 3, height / 2.5);
+  fileInput.style('background-color', 'white');
+  fileInput.style('height', '50px');
+  fileInput.style('width', '400px');
+  fileInput.style('padding', '15px 25px');
+  fileInput.style('color', 'black');
+  fileInput.style('border', 'none');
+  fileInput.style('border-radius', '10px');
+  fileInput.style('font-size', '24px');
 }
 
 function draw() {
