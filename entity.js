@@ -22,7 +22,7 @@ class Entity {
       noStroke();
       ctx.shadowBlur = 50;
       ctx.shadowColor = this.color;
-      let pt = points[points.length - this.step - 1];
+      let pt = points[points.length - floor(this.step) - 1];
       this.x = pt.x - entitySize / 2;
       this.y = pt.y - entitySize / 2 - this.offset;
       rect(this.x, this.y, entitySize, entitySize, 3);
@@ -44,6 +44,10 @@ class Entity {
   
   setCollisionInProcess(collisionInProcess) {
     this.collisionInProcess = collisionInProcess;
+  }
+  
+  increaseVelocity() {
+    this.velocity += 0.06;
   }
 
   getCount() {

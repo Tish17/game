@@ -65,6 +65,11 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
+  if (frameCount % 60 === 0) {
+    obstacle.increaseVelocity();
+    boost.increaseVelocity();
+    health.increaseVelocity();
+  }
   checkSuperMode();
   addPoints();
   drawLine();
