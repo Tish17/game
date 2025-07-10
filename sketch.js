@@ -17,6 +17,7 @@ let health;
 let entitySize;
 let entityOffset;
 let ctx;
+let gameStarted = false;
 let startSuperMode;
 let endSuperMode = 0;
 let superModeTimeout = 10;
@@ -72,6 +73,9 @@ function draw() {
   } else if (ball.getHealth() < 1) {
     drawText("GAME OVER");
     song.stop();
+    return;
+  } else if (waveform.length > 0 && !song.isPlaying() && gameStarted) {
+    drawText("YOU WON!!!");
     return;
   }
   if (step >= peakNumber) {
@@ -154,8 +158,9 @@ function checkCollision(entity) {
 }
 
 function mousePressed() {
-  if (waveform.length > 0 && !song.isPlaying()) {
+  if (waveform.length > 0 && !song.isPlaying() && !gameStarted) {
     song.play();
+    gameStarted = true;
   }
   if (!ball.isJumping()) {
     ball.updateJumping();
