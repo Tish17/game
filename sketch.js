@@ -81,7 +81,7 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
-  let velocityStep = velocity * deltaTime / 1000;
+  let velocityStep = velocity * deltaTime;
   if (frameCount % 60 === 0) {
     obstacle.increaseVelocity(velocityStep);
     boost.increaseVelocity(velocityStep);
