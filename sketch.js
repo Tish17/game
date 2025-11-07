@@ -69,7 +69,7 @@ function draw() {
   if (waveform.length === 0) {
     return;
   }
-  startSuperMode = new Date().getTime();
+  startSuperMode = millis();
   if (waveform.length > 0 && !song.isPlaying() && ball.getHealth() === 10) {
     drawText("Tap to play");
     return;
