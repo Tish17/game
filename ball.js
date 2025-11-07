@@ -1,5 +1,5 @@
 class Ball {
-  constructor() {
+  constructor(jumpVelocity, gravity) {
     this.offset = 0;
     this.velocity = 0;
     this.jumping = false;
@@ -8,6 +8,8 @@ class Ball {
     this.power = 0;
     this.x = 0;
     this.y = 0;
+    this.jumpVelocity = jumpVelocity;
+    this.gravity = gravity;
   }
   
   draw(stepY) {
@@ -23,7 +25,7 @@ class Ball {
   
   jump() {
     let dtSeconds = deltaTime / 1000;
-    this.velocity += gravity * dtSeconds;
+    this.velocity += this.gravity * dtSeconds;
     this.offset += this.velocity * dtSeconds;
     if (this.offset > 0) {
       this.offset = 0;
@@ -37,7 +39,7 @@ class Ball {
   }
   
   updateJumping() {
-    this.velocity = -jumpHeight;
+    this.velocity = this.jumpVelocity;
     this.jumping = true;
   }
   
