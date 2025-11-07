@@ -22,6 +22,9 @@ let startSuperMode;
 let endSuperMode = 0;
 let superModeTimeout = 10;
 let superBorderSize = 5;
+let timeSinceLastSpeedIncrease = 0;
+let speedIncreaseInterval = 1000;
+let speedIncreaseAmount = 0.06;
 const collisionMargin = 15;
 const amplitude = 0.5;
 
@@ -81,11 +84,13 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
-  let velocityStep = velocity * deltaTime / 1000;
-  if (frameCount % 60 === 0) {
-    obstacle.increaseVelocity(velocityStep);
-    boost.increaseVelocity(velocityStep);
-    health.increaseVelocity(velocityStep);
+  timeSinceLastSpeedIncrease += deltaTime;
+  if (timeSinceLastSpeedIncrease >= speedIncreaseInterval) {
+    // velocity += speedIncreaseAmount;
+    obstacle.increaseVelocity(speedIncreaseAmount);
+    boost.increaseVelocity(speedIncreaseAmount);
+    health.increaseVelocity(speedIncreaseAmount);
+    timeSinceLastSpeedIncrease = 0;
   }
   checkSuperMode();
   addPoints();
@@ -99,7 +104,7 @@ function draw() {
   } else {
     checkCollision(entity);
   }
-  step += velocityStep;
+  step += velocity * deltaTime / 1000;
 }
 
 function drawLine() {
