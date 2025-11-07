@@ -25,8 +25,9 @@ class Ball {
   }
   
   jump() {
-    this.velocity += this.gravity;
-    this.offset += this.velocity;
+    let dtSeconds = deltaTime / 1000;
+    this.velocity += this.gravity * dtSeconds;
+    this.offset += this.velocity * dtSeconds;
     if (this.offset > 0) {
       this.offset = 0;
       this.velocity = 0;
