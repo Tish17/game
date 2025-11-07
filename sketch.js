@@ -5,7 +5,7 @@ let waveform = [];
 let step = 0;
 let limit = 10;
 let peakNumber = 1000;
-let velocity = 0.06;
+let velocity = 3.6;
 let jumpHeight = 15;
 let points;
 let ball;
@@ -81,7 +81,7 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
-  let velocityStep = velocity * deltaTime;
+  let velocityStep = velocity * deltaTime / 1000;
   if (frameCount % 60 === 0) {
     obstacle.increaseVelocity(velocityStep);
     boost.increaseVelocity(velocityStep);
