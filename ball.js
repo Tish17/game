@@ -2,7 +2,6 @@ class Ball {
   constructor() {
     this.offset = 0;
     this.velocity = 0;
-    this.gravity = 2400;
     this.jumping = false;
     this.color = ballColor;
     this.health = 10;
@@ -24,7 +23,7 @@ class Ball {
   
   jump() {
     let dtSeconds = deltaTime / 1000;
-    this.velocity += this.gravity * dtSeconds;
+    this.velocity += gravity * dtSeconds;
     this.offset += this.velocity * dtSeconds;
     if (this.offset > 0) {
       this.offset = 0;

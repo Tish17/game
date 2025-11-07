@@ -7,6 +7,7 @@ let limit = 10;
 let peakNumber = 1000;
 let velocity = 3.6;
 let jumpHeight = 900;
+let gravity = 2400;
 let points;
 let ball;
 let ballColor = "white";
@@ -50,7 +51,7 @@ function setup() {
   boost = new Entity(color(38, 49, 255), Types.BOOST);
   health = new Entity(color(0, 184, 43), Types.HEALTH);
   entitySize = height * 0.04;
-  entityOffset = jumpHeight + ballRadius * 2;
+  entityOffset = (jumpHeight * jumpHeight) / (2 * gravity);
   ctx = drawingContext;
   fileInput = createFileInput(handleFile);
   fileInput.position(width / 3, height / 2.5);
