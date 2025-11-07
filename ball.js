@@ -2,7 +2,7 @@ class Ball {
   constructor() {
     this.offset = 0;
     this.velocity = 0;
-    this.gravity = 0.8;
+    this.gravity = 2400;
     this.jumping = false;
     this.color = ballColor;
     this.health = 10;

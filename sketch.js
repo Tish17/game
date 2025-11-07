@@ -6,7 +6,7 @@ let step = 0;
 let limit = 10;
 let peakNumber = 1000;
 let velocity = 3.6;
-let jumpHeight = 15;
+let jumpHeight = 900;
 let points;
 let ball;
 let ballColor = "white";
