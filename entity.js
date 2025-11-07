@@ -20,8 +20,6 @@ class Entity {
     } else {
       fill(this.color);
       noStroke();
-      ctx.shadowBlur = 50;
-      ctx.shadowColor = this.color;
       let pt = points[points.length - floor(this.step) - 1];
       this.x = pt.x - entitySize / 2;
       this.y = pt.y - entitySize / 2 - this.offset;

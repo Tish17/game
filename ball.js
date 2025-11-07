@@ -19,8 +19,6 @@ class Ball {
     let superColor = this.superMode() ? this.getSuperColor() : this.color;
     fill(superColor);
     noStroke();
-    ctx.shadowBlur = 100;
-    ctx.shadowColor = superColor;
     circle(this.x, this.y, ballRadius);
   }
   

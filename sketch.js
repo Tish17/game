@@ -108,8 +108,6 @@ function draw() {
 }
 
 function drawLine() {
-  ctx.shadowBlur = 20;
-  ctx.shadowColor = "violet";
   stroke("violet");
   strokeWeight(2);
   noFill();
@@ -204,8 +202,6 @@ function lerpPeak(index) {
 }
 
 function drawState(entity, x) {
-  ctx.shadowBlur = 40;
-  ctx.shadowColor = entity.getColor();
   fill(entity.getColor());
   noStroke();
   text(entity.getType() === 'HEALTH' ? ball.getHealth() : ball.getPower(), x, height / 8);
@@ -214,7 +210,6 @@ function drawState(entity, x) {
 function drawText(textToDraw) {
   fill("white");
   noStroke();
-  ctx.shadowBlur = 0;
   text(textToDraw, width / 2.5, height / 2);
 }
 
@@ -222,8 +217,6 @@ function drawSuperBorder() {
   let superColor = ball.getSuperColor();
   noStroke();
   fill(superColor);
-  ctx.shadowBlur = 100;
-  ctx.shadowColor = superColor;
   rect(0, 0, width, superBorderSize);
   rect(0, height - superBorderSize, width, superBorderSize);
   rect(0, 0, superBorderSize, height);
