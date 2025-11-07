@@ -46,8 +46,8 @@ class Entity {
     this.collisionInProcess = collisionInProcess;
   }
   
-  increaseVelocity() {
-    this.velocity += 0.06;
+  increaseVelocity(velocityStep) {
+    this.velocity += velocityStep;
   }
 
   getCount() {

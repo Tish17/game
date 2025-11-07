@@ -81,10 +81,11 @@ function draw() {
   if (step >= peakNumber) {
     step = 0;
   }
+  let velocityStep = velocity * deltaTime / 1000;
   if (frameCount % 60 === 0) {
-    obstacle.increaseVelocity();
-    boost.increaseVelocity();
-    health.increaseVelocity();
+    obstacle.increaseVelocity(velocityStep);
+    boost.increaseVelocity(velocityStep);
+    health.increaseVelocity(velocityStep);
   }
   checkSuperMode();
   addPoints();
@@ -98,7 +99,7 @@ function draw() {
   } else {
     checkCollision(entity);
   }
-  step += velocity;
+  step += velocityStep;
 }
 
 function drawLine() {
